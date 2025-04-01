@@ -60,7 +60,6 @@ createAutoComplete({
         onMovieSelect(movie, document.querySelector('#right-summmery'), 'right')
     }
 })
-
 //Crear las variables para leftMovie y rightMOvie
 let leftMovie
 let rightMovie
@@ -80,7 +79,6 @@ const onMovieSelect = async (movie,summaryElement,side )=>{
     }else{
         rightMovie = response.data
     }
-
     //Preguntamos si tenemos ambos lados 
     if(leftMovie && rightMovie){
         //Entonces ejecuitamos la funcion de comparacion
@@ -105,11 +103,30 @@ const runComparison = () => {
             rightStat.classList.remove('is-primary')
             rightStat.classList.add('is-danger')
         }
-        
-
 
     })
 
+}
+
+const movieComplete = (movieDetails) => {
+    //Transformar a numeros los strings que llegan de los datos 
+
+    const dollars = parseInt(movieDetails.BoxOffice.replace(/\$/g, '').replace(/,/g, ''))
+    console.log(dollars)
+    const metasocre = parseInt(movieDetails.Metascore)
+    const imdbRating = parseInt(movieDetails.imdbRating)
+    const imdVotes = parseInt(movieDetails.imdVotes.replace(/,/g, ''))
+    console.log(metasocre, imdbRating, imdVotes)
+    const awards = movieDetails.Awards.split('').reduce((prev, word) => {
+        const value = parseInt(word)
+
+        if(isNaN(value)){
+            return prev 
+        }else{
+            return prev + value
+        }
+    }, 0)
+    console.log('Awards',award)
 }
 
 const root = document.querySelector(' .autocomplete')
