@@ -113,7 +113,7 @@ const movieComplete = (movieDetails) => {
 
     const dollars = parseInt(movieDetails.BoxOffice.replace(/\$/g, '').replace(/,/g, ''))
     console.log(dollars)
-    const metasocre = parseInt(movieDetails.Metascore)
+    const metascore = parseInt(movieDetails.Metascore)
     const imdbRating = parseInt(movieDetails.imdbRating)
     const imdVotes = parseInt(movieDetails.imdVotes.replace(/,/g, ''))
     console.log(metasocre, imdbRating, imdVotes)
@@ -126,7 +126,47 @@ const movieComplete = (movieDetails) => {
             return prev + value
         }
     }, 0)
-    console.log('Awards',award)
+    console.log('Awards', award)
+
+    //Agregar la propiedad datavalue a cada elemento del template
+
+    rerturn `
+    <article class="media">
+        <figure class="medialeft">
+            <p class="image">
+                <img src="${movieDetails.Poster}"/>
+            </p>
+        </figure>
+        <div class="media-content">
+            <div class="content">
+                <h1>${movieDetails.Title}</h1>
+                <h1>${movieDetails.Genre}</h1>
+                <h1>${movieDetails.Plot}</h1>
+            </div>
+        </dib>
+    </article>
+    <article data-values=${award} class="notification is primary">
+        <p class="title">${movieDetails.Awards} </p>
+        <p class="subtitle">Awards</p>
+    </article>
+    <article data-values=${dollars} class="notification is primary">
+        <p class="title">${movieDetails.BoxOffice} </p>
+        <p class="subtitle">Box Office</p>
+    </article>
+    <article data-values=${metascore} class="notification is primary">
+        <p class="title">${movieDetails.Metascore} </p>
+        <p class="subtitle">Metascore</p>
+    </article>
+    <article data-values=${imdbRating} class="notification is primary">
+        <p class="title">${movieDetails.imdbRating} </p>
+        <p class="subtitle">IMDB Rating</p>
+    </article>
+    <article data-values=${imdVotes} class="notification is primary">
+        <p class="title">${movieDetails.imdVotes} </p>
+        <p class="subtitle">IMDB Votes</p>
+    </article>
+        
+    `
 }
 
 const root = document.querySelector(' .autocomplete')
